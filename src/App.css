@@ -9,10 +9,15 @@
 }
 
 @theme {
-  /* Fonts */
-  --font-playfair: "Playfair Display", serif;
-  --font-poppins: "Outfit", sans-serif; /* Switched to Outfit/Inter feel as requested */
-  --font-body: "Inter", sans-serif;
+  /* Elevated Typography Palette */
+  --font-editorial: "Cormorant Garamond", serif;        /* Ultra-luxury headlines */
+  --font-display: "Libre Caslon Text", serif;           /* Secondary display */
+  --font-body: "Montserrat", sans-serif;                /* Refined body text */
+  --font-mono: "DM Mono", monospace;                    /* Tech/science callouts */
+
+  /* Legacy compat */
+  --font-playfair: "Cormorant Garamond", serif;
+  --font-poppins: "Montserrat", sans-serif;
 
   /* Breakpoints */
   --breakpoint-mlg: 77rem;
@@ -82,13 +87,75 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .font-editorial {
-    font-family: var(--font-playfair);
+    font-family: var(--font-editorial);
+    font-weight: 500;
+    letter-spacing: -0.02em;
   }
-  
+
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
   .font-luxury {
-    font-family: var(--font-poppins);
+    font-family: var(--font-body);
+    letter-spacing: 0.01em;
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  /* Film Grain Texture Overlay */
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Radial Gradient Spotlight */
+  .radial-glow {
+    background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(201, 161, 74, 0.08), transparent 70%);
+  }
+
+  /* Decorative Line Elements */
+  .decorative-line {
+    position: relative;
+  }
+
+  .decorative-line::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C9A14A, transparent);
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Elevated Shadow */
+  .shadow-luxury {
+    box-shadow: 0 20px 60px rgba(74, 44, 23, 0.12), 0 8px 16px rgba(74, 44, 23, 0.08);
+  }
+
+  /* Text Gradient Effect */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #C9A14A 0%, #8C6A3D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
@@ -127,4 +194,82 @@ html {
 :focus-visible {
   outline: 1px solid #C9A14A;
   outline-offset: 2px;
+}
+
+/* Sophisticated Animation Keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes draw-line {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Global Animation Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Luxury Hover States */
+.luxury-hover {
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.luxury-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(74, 44, 23, 0.15);
 }
