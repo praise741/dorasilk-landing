@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, ArrowRight } from "lucide-react";
+import { Play } from "lucide-react";
 import hairmakingImg from "../../../assets/hairmaking.jpg"; // Fallback image
 
 const fadeUp = {
@@ -10,7 +10,7 @@ const fadeUp = {
     transition: {
       delay: i * 0.2,
       duration: 1.2,
-      ease: [0.22, 1, 0.36, 1], // Custom ease for luxury feel
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number], // Custom ease for luxury feel
     },
   }),
 };

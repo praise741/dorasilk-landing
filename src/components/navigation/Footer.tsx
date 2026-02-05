@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import Socials from "../ui/Socials";
 // @ts-ignore
 import { HashLink } from "react-router-hash-link";
-import GoldenText from "../ui/GoldenText";
+
 
 interface MenuItem {
   title: string;
