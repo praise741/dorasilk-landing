@@ -49,7 +49,7 @@ const Footer = ({
         { text: "Blog", url: "#", hashlink: true },
         { text: "Shop", url: "/#products", hashlink: true },
         // Phase 4: Discreet Trade Link
-        { text: "Trade & Partnerships", url: "/trade", discreet: true },
+        { text: "Trade & Partnerships", url: "https://shop.dorasilk.com/partnerships", discreet: true },
       ],
     },
     {

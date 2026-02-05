@@ -7,8 +7,6 @@ import { Routes, Route } from "react-router";
 const PrivacyPolicy = lazy(() => import("@/pages/landing/PrivacyPolicy"));
 const ReturnPolicy = lazy(() => import("@/pages/landing/ReturnPolicy"));
 const TermsOfUse = lazy(() => import("@/pages/landing/TermsOfUse"));
-const Trade = lazy(() => import("@/pages/Trade"));
-const Checkout = lazy(() => import("@/pages/Checkout"));
 
 const LandingRoutes = () => {
   return (
@@ -18,8 +16,6 @@ const LandingRoutes = () => {
         <Route path="/terms-of-use" element={<TermsOfUse />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/refund-policy" element={<ReturnPolicy />} />
-        <Route path="/trade" element={<Trade />} />
-        <Route path="/checkout" element={<Checkout />} />
       </Route>
     </Routes>
   );

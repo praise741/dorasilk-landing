@@ -1,17 +1,7 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { productsApi, Product } from "@/api/products";
 import prep from "@/assets/prep.jpg";
 import treat from "@/assets/treat.jpg";
 import seal from "@/assets/seal.jpg";
-
-// Fallback images if API images are missing
-const getImage = (handle: string) => {
-    if (handle.includes("prep")) return prep;
-    if (handle.includes("sleek") || handle.includes("curl")) return treat;
-    if (handle.includes("serum")) return seal;
-    return prep;
-};
 
 const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -26,63 +16,28 @@ const fadeUp = {
     }),
 };
 
+const products = [
+    {
+        id: "1",
+        title: "Prep + Purify Shampoo",
+        slug: "prep-purify",
+        image: prep,
+    },
+    {
+        id: "2",
+        title: "Sleek Fusion Treatment",
+        slug: "sleek-fusion",
+        image: treat,
+    },
+    {
+        id: "3",
+        title: "Elixir Serum",
+        slug: "elixir-serum",
+        image: seal,
+    },
+];
+
 const CollectionSection = () => {
-    const [products, setProducts] = useState<Product[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const data = await productsApi.getAll();
-                // If API returns empty (no seed data), we might want to keep mock, but let's try real first.
-                // For this demo, let's map API data or fallback
-                if (data && data.length > 0) {
-                    setProducts(data);
-                } else {
-                    // Fallback mock if DB is empty
-                    console.warn("No products found, using fallback.");
-                    setProducts([
-                        {
-                            id: "1",
-                            title: "Prep + Purify Shampoo",
-                            price: 45,
-                            images: [prep],
-                            description: "",
-                            slug: "prep-purify",
-                            handle: "prep-purify",
-                            variants: []
-                        },
-                        {
-                            id: "2",
-                            title: "Sleek Fusion Treatment",
-                            price: 65,
-                            images: [treat],
-                            description: "",
-                            slug: "sleek-fusion",
-                            handle: "sleek-fusion",
-                            variants: []
-                        },
-                        {
-                            id: "3",
-                            title: "Elixir Serum",
-                            price: 55,
-                            images: [seal],
-                            description: "",
-                            slug: "elixir-serum",
-                            handle: "elixir-serum",
-                            variants: []
-                        }
-                    ]);
-                }
-            } catch (err) {
-                console.error("Failed to fetch products", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProducts();
-    }, []);
-
     return (
         <section id="products" className="relative py-32 px-6 md:px-12 lg:px-24 bg-background overflow-hidden border-t border-border/50">
             <div className="max-w-[90rem] mx-auto">
@@ -131,24 +86,22 @@ const CollectionSection = () => {
                         >
                             <div className="relative aspect-[4/5] overflow-hidden bg-secondary/10 mb-6">
                                 <img
-                                    src={product.images?.[0] || getImage(product.handle)}
+                                    src={product.image}
                                     alt={product.title}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
-                                {/* Quick Add Overlay */}
                                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                     <a
-                                        href={`https://shop.dorasilk.com/products/${product.handle || product.slug}`}
+                                        href={`https://shop.dorasilk.com/products/${product.slug}`}
                                         className="bg-white/90 backdrop-blur text-primary px-8 py-3 font-luxury text-xs uppercase tracking-widest hover:bg-white transition-colors"
                                     >
-                                        Shop Now — ₦{product.price}
+                                        Shop Now
                                     </a>
                                 </div>
                             </div>
 
                             <div className="space-y-1">
                                 <h3 className="font-editorial text-2xl text-primary">{product.title}</h3>
-                                <p className="font-luxury text-sm text-foreground/60">₦{product.price}.00</p>
                             </div>
                         </motion.div>
                     ))}
