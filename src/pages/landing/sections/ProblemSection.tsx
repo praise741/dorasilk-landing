@@ -15,7 +15,7 @@ const fadeUp = {
 
 const TechnologySection = () => {
   return (
-    <section className="relative py-32 px-6 md:px-12 lg:px-24 bg-white overflow-hidden">
+    <section className="relative py-32 px-6 md:px-12 lg:px-24 bg-secondary/30 overflow-hidden">
       <div className="max-w-[90rem] mx-auto grid md:grid-cols-5 gap-12 md:gap-16 items-center">
         {/* Image Left (40%) */}
         <motion.div

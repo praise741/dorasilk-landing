@@ -50,7 +50,7 @@ const NewEraSection = () => {
         >
           <a
             href="https://shop.dorasilk.com/#products"
-            className="inline-block px-10 py-4 bg-white text-primary font-luxury text-sm font-medium tracking-widest uppercase transition-all duration-500 hover:bg-accent hover:text-primary"
+            className="inline-block px-10 py-4 bg-accent text-primary font-luxury text-sm font-medium tracking-widest uppercase transition-all duration-500 hover:bg-gold-1 hover:text-white"
           >
             Shop the Collection
           </a>

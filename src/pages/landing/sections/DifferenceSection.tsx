@@ -16,7 +16,7 @@ const fadeUp = {
 
 const DifferenceSection = () => {
   return (
-    <section className="relative py-24 px-6 md:px-12 lg:px-24 bg-white overflow-hidden">
+    <section className="relative py-24 px-6 md:px-12 lg:px-24 bg-background overflow-hidden">
       <div className="max-w-4xl mx-auto text-center">
         
         {/* Header */}

@@ -93,7 +93,7 @@ const CollectionSection = () => {
                                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                     <a
                                         href={`https://shop.dorasilk.com/products/${product.slug}`}
-                                        className="bg-white/90 backdrop-blur text-primary px-8 py-3 font-luxury text-xs uppercase tracking-widest hover:bg-white transition-colors"
+                                        className="bg-accent/90 backdrop-blur text-primary px-8 py-3 font-luxury text-xs uppercase tracking-widest hover:bg-accent transition-colors"
                                     >
                                         Shop Now
                                     </a>

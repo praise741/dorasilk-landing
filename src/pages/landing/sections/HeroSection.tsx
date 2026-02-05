@@ -84,7 +84,7 @@ const HeroSection = () => {
         >
           <a
             href="https://shop.dorasilk.com"
-            className="group relative px-10 py-4 bg-white text-primary rounded-none font-luxury text-sm font-medium tracking-widest uppercase transition-all duration-500 hover:bg-accent hover:text-primary"
+            className="group relative px-10 py-4 bg-accent text-primary rounded-none font-luxury text-sm font-medium tracking-widest uppercase transition-all duration-500 hover:bg-gold-1 hover:text-white"
           >
             Discover the Ritual
           </a>
