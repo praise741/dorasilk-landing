@@ -6,7 +6,7 @@ import curlImg from "@/assets/product-curlfusion.jpg";
 import elixirImg from "@/assets/product-elixirserum.jpg";
 import heatluxeImg from "@/assets/product-heatluxe.jpg";
 
-const BACKEND_URL = "https://dorasilk-backend.onrender.com";
+const BACKEND_URL = import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || "https://72.62.237.251.sslip.io";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -52,7 +52,7 @@ const CollectionSection = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`${BACKEND_URL}/api/products`)
+        fetch(`${BACKEND_URL}/api/products`, { headers: { 'Accept': 'application/json' } })
             .then(res => res.json())
             .then(data => {
                 const items = data?.items || data || [];
