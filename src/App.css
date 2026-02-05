@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "tailwindcss-animated";
+
+@custom-variant dark (&:is(.dark *));
+
+* {
+  box-sizing: border-box;
+}
+
+@theme {
+  /* Fonts */
+  --font-playfair: "Playfair Display", serif;
+  --font-poppins: "Outfit", sans-serif; /* Switched to Outfit/Inter feel as requested */
+  --font-body: "Inter", sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-mlg: 77rem;
+
+  /* Dorasilk Official Luxury Palette */
+  --color-dorasilk-brown: #4A2C17;    /* Dark Brown (Luxury Base) */
+  --color-dorasilk-ivory: #F7F5F0;    /* Soft Ivory (Main Bg) */
+  --color-dorasilk-gold: #C9A14A;     /* Champagne Gold (Accent) */
+  --color-dorasilk-charcoal: #2B2B2B; /* Warm Charcoal (Text) */
+  --color-dorasilk-grey: #E6E4E1;     /* Soft Grey (Support) */
+  --color-dorasilk-bronze: #8C6A3D;   /* Muted Bronze (Special) */
+
+  /* Legacy Compat (remapped) */
+  --color-gold-1: #8C6A3D;
+  --color-gold-2: #C9A14A;
+}
+
+/* Mapping to Semantic Theme Variables */
+:root {
+  --radius: 0rem; /* sharper, more editorial corners */
+  
+  /* Main Background & Text */
+  --background: #F7F5F0; /* Soft Ivory */
+  --foreground: #2B2B2B; /* Warm Charcoal */
+
+  /* Cards & Elevating Elements */
+  --card: #FFFFFF;
+  --card-foreground: #2B2B2B;
+  
+  /* Interactive Elements */
+  --primary: #4A2C17; /* Dark Brown */
+  --primary-foreground: #F7F5F0;
+
+  --secondary: #E6E4E1; /* Soft Grey */
+  --secondary-foreground: #4A2C17;
+
+  --accent: #C9A14A; /* Champagne Gold */
+  --accent-foreground: #4A2C17;
+  
+  --muted: #E6E4E1;
+  --muted-foreground: #666666;
+  
+  --border: #E6E4E1;
+  --input: #E6E4E1;
+  --ring: #C9A14A; /* Gold focus rings */
+
+  /* Sidebar/Navigation */
+  --sidebar: #4A2C17;
+  --sidebar-foreground: #F7F5F0;
+}
+
+.dark {
+  /* Dark Mode with brand-consistent dark brown tones */
+  --background: #1A0F08;
+  --foreground: #F7F5F0;
+  --card: #2B1810;
+  --card-foreground: #F7F5F0;
+  --primary: #F7F5F0;
+  --primary-foreground: #1A0F08;
+  --secondary: #2B2B2B;
+  --secondary-foreground: #F7F5F0;
+  --border: #2B2B2B;
+}
+
+/* Custom utilities for luxury landing page */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .font-editorial {
+    font-family: var(--font-playfair);
+  }
+  
+  .font-luxury {
+    font-family: var(--font-poppins);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Custom scrollbar for luxury feel */
+::-webkit-scrollbar {
+  width: 6px; /* Thinner */
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F5F0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C9A14A; /* Champagne Gold */
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8C6A3D; /* Bronze hover */
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(201, 161, 74, 0.2); /* Gold tint */
+  color: #4A2C17;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 1px solid #C9A14A;
+  outline-offset: 2px;
+}
