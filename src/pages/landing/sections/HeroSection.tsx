@@ -17,7 +17,7 @@ const fadeUp = {
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-primary text-primary-foreground flex items-center justify-center">
+    <section className="relative h-screen w-full overflow-hidden bg-primary text-primary-foreground flex items-center justify-center pt-20">
       {/* Cinematic Background */}
       <div className="absolute inset-0 z-0 select-none">
         {/* Dark Overlay for Text Readability */}

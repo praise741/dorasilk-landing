@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import prep from "@/assets/prep.jpg";
-import treat from "@/assets/treat.jpg";
-import seal from "@/assets/seal.jpg";
+import { useEffect, useState } from "react";
+import prepImg from "@/assets/product-prep+purify.jpg";
+import sleekImg from "@/assets/product-sleekfusion.jpg";
+import curlImg from "@/assets/product-curlfusion.jpg";
+import elixirImg from "@/assets/product-elixirserum.jpg";
+import heatluxeImg from "@/assets/product-heatluxe.jpg";
+
+const BACKEND_URL = "https://dorasilk-backend.onrender.com";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -16,28 +21,57 @@ const fadeUp = {
     }),
 };
 
-const products = [
-    {
-        id: "1",
-        title: "Prep + Purify Shampoo",
-        slug: "prep-purify",
-        image: prep,
-    },
-    {
-        id: "2",
-        title: "Sleek Fusion Treatment",
-        slug: "sleek-fusion",
-        image: treat,
-    },
-    {
-        id: "3",
-        title: "Elixir Serum",
-        slug: "elixir-serum",
-        image: seal,
-    },
-];
+// Fallback images mapped by slug keywords
+const fallbackImages: Record<string, string> = {
+    "prep": prepImg,
+    "purify": prepImg,
+    "sleek": sleekImg,
+    "curl": curlImg,
+    "elixir": elixirImg,
+    "serum": elixirImg,
+    "heatluxe": heatluxeImg,
+};
+
+const getFallbackImage = (slug: string) => {
+    for (const [key, img] of Object.entries(fallbackImages)) {
+        if (slug.toLowerCase().includes(key)) return img;
+    }
+    return prepImg;
+};
+
+interface Product {
+    id: string;
+    name: string;
+    slug: string;
+    basePrice: number;
+    images: string[];
+}
 
 const CollectionSection = () => {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch(`${BACKEND_URL}/api/products`)
+            .then(res => res.json())
+            .then(data => {
+                const items = data?.items || data || [];
+                if (Array.isArray(items) && items.length > 0) {
+                    setProducts(items);
+                }
+            })
+            .catch(() => {})
+            .finally(() => setLoading(false));
+    }, []);
+
+    const getProductImage = (product: Product) => {
+        if (product.images?.[0]) {
+            const img = product.images[0];
+            return img.startsWith("http") ? img : `${BACKEND_URL}${img}`;
+        }
+        return getFallbackImage(product.slug);
+    };
+
     return (
         <section id="products" className="relative py-32 px-6 md:px-12 lg:px-24 bg-background overflow-hidden border-t border-border/50">
             <div className="max-w-[90rem] mx-auto">
@@ -73,39 +107,48 @@ const CollectionSection = () => {
                 </div>
 
                 {/* Product Grid */}
-                <div className="grid md:grid-cols-3 gap-x-8 gap-y-12">
-                    {products.map((product, i) => (
-                        <motion.div
-                            key={product.id}
-                            custom={i + 2}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
-                            variants={fadeUp}
-                            className="group cursor-pointer"
-                        >
-                            <div className="relative aspect-[4/5] overflow-hidden bg-secondary/10 mb-6">
-                                <img
-                                    src={product.image}
-                                    alt={product.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <a
-                                        href={`https://shop.dorasilk.com/products/${product.slug}`}
-                                        className="bg-accent/90 backdrop-blur text-primary px-8 py-3 font-luxury text-xs uppercase tracking-widest hover:bg-accent transition-colors"
-                                    >
-                                        Shop Now
-                                    </a>
+                {loading ? (
+                    <div className="grid md:grid-cols-3 gap-x-8 gap-y-12">
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className="aspect-[4/5] bg-secondary/20 animate-pulse" />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
+                        {products.map((product, i) => (
+                            <motion.a
+                                key={product.id}
+                                href={`https://shop.dorasilk.com/products/${product.slug}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                custom={i + 2}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-50px" }}
+                                variants={fadeUp}
+                                className="group cursor-pointer block"
+                            >
+                                <div className="relative aspect-[4/5] overflow-hidden bg-secondary/10 mb-6">
+                                    <img
+                                        src={getProductImage(product)}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span className="bg-accent/90 backdrop-blur text-primary px-8 py-3 font-luxury text-xs uppercase tracking-widest">
+                                            Shop Now
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="space-y-1">
-                                <h3 className="font-editorial text-2xl text-primary">{product.title}</h3>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                                <div className="space-y-1">
+                                    <h3 className="font-editorial text-xl text-primary">{product.name}</h3>
+                                    <p className="font-luxury text-sm text-accent">₦{Number(product.basePrice).toLocaleString()}</p>
+                                </div>
+                            </motion.a>
+                        ))}
+                    </div>
+                )}
 
             </div>
         </section>

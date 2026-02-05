@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import seal from "@/assets/seal.jpg";
+import seal from "@/assets/product-elixirserum.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
