@@ -55,9 +55,9 @@ const HeroSection = () => {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="font-editorial text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-[1.1] mb-8 tracking-tight"
+          className="font-editorial text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.15] mb-8 tracking-tight max-w-5xl"
         >
-          Dorasilk™ — The First-of-Its-Kind <br />
+          Dorasilk™ — The First-of-Its-Kind{" "}
           <span className="italic text-white">Intelligent Wig Revamp Ritual System™</span>
         </motion.h1>
 

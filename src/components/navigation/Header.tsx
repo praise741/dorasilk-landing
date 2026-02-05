@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import logo from "@/assets/dorasilk-logo.png";
 import Navbar from "./Navbar";
 import { AlignJustify, ShoppingBag } from "lucide-react";
 import Sidebar from "./Sidebar";
@@ -23,7 +22,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 md:px-12 lg:px-24 flex items-center justify-between">
         <a href="/" className="flex-shrink-0">
-          <img src={logo} alt="Dorasilk" className="h-8 md:h-10 w-auto invert" />
+          <span className="font-playfair text-xl md:text-2xl font-bold text-gold-2 tracking-wide">Dorasilk™</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
